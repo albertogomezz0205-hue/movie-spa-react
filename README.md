@@ -6,7 +6,7 @@ Aplicación SPA desarrollada con React + TypeScript que permite buscar película
 
 ##  Demo
 
- Live Demo:
+ Live Demo: https://movie-spa-react-app.vercel.app
 
 ---
 
