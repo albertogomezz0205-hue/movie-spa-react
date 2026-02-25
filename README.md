@@ -1,73 +1,129 @@
-# React + TypeScript + Vite
+#  Movie SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación SPA desarrollada con React + TypeScript que permite buscar películas usando la API de OMDb, aplicar filtros avanzados, guardar favoritos y explorar resultados mediante scroll infinito.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Demo
 
-## React Compiler
+ Live Demo:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+##  Tecnologías utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- OMDb API
+- LocalStorage
+- IntersectionObserver API
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+##  Funcionalidades
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Búsqueda por título
+- Filtros avanzados (tipo: movie, series, episode + año)
+- Scroll infinito con IntersectionObserver
+- Gestión de favoritos persistente en localStorage
+- Ordenación de favoritos (A-Z / Fecha de agregado)
+- Modal accesible (cierre con ESC + atributos ARIA)
+- Skeleton loader animado para mejorar la experiencia de usuario
+- Arquitectura organizada por responsabilidades
+
+---
+
+##  Arquitectura del proyecto
+
+```
+src/
+ components/
+ hooks/
+ services/
+ utils/
+ App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Custom Hooks
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `useMovies` → Maneja búsqueda, paginación e implementación de scroll infinito.
+- `useFavorites` → Maneja la lógica de favoritos y persistencia en localStorage.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Services
+
+- `omdbService.ts` → Centraliza las llamadas a la API.
+
+### Utils
+
+- `sortFavorites.ts` → Lógica desacoplada para ordenación.
+
+---
+
+##  Decisiones técnicas
+
+### Scroll infinito
+Se implementó utilizando `IntersectionObserver` para detectar cuándo el último elemento visible entra en el viewport y cargar automáticamente la siguiente página de resultados.
+
+Esto permite:
+- Mejor experiencia de usuario
+- Interfaz más moderna
+- Eliminación de paginación manual
+
+---
+
+### Persistencia de datos
+Los favoritos se almacenan en `localStorage`, permitiendo mantener el estado incluso después de recargar la página.
+
+---
+
+### Accesibilidad
+El modal incluye:
+- role="dialog"
+- aria-modal
+- aria-labelledby
+- Cierre con tecla ESC
+- Gestión de foco al abrir
+
+---
+
+##  Instalación y ejecución
+
+```bash
+npm install
+npm run dev
 ```
+
+---
+
+##  Variables de entorno
+
+
+```
+VITE_OMDB_API_KEY=tu_api_key
+```
+
+
+---
+
+##  Build de producción
+
+```bash
+npm run build
+```
+
+---
+
+##  Mejoras futuras
+
+- Tipado más estricto eliminando completamente `any`
+- Tests unitarios
+- Mejoras adicionales de diseño responsive
+- Optimización de rendimiento
+- Implementación de debounce en la búsqueda
+
+---
+
+##  Autor Carlos Alberto G
+
+Proyecto desarrollado como prueba técnica.
