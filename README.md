@@ -73,7 +73,7 @@ Esto permite:
 ---
 
 ### Persistencia de datos
-Los favoritos se almacenan en `localStorage`, permitiendo mantener el estado incluso después de recargar la página.
+Los favoritos se almacenan en `localStorage` permitiendo mantener el estado incluso después de recargar la página.
 
 ---
 
@@ -121,6 +121,44 @@ npm run build
 - Mejoras adicionales de diseño responsive
 - Optimización de rendimiento
 - Implementación de debounce en la búsqueda
+
+---
+
+Actividad #2 – Desestructuración y Deep Copy
+Descripción
+
+Esta actividad demuestra el manejo de objetos y arreglos anidados en JavaScript, aplicando el concepto de inmutabilidad mediante una copia profunda (deep copy).
+
+El objetivo es crear un nuevo arreglo a partir de uno original, modificar múltiples campos del arreglo copiado y comprobar que el objeto original no se ve afectado.
+
+Ubicación del archivo:
+La solución se encuentra en el archivo:
+
+jsonActivity2.js
+
+Tecnologías utilizadas:
+
+-JavaScript (ES6+)
+
+-Node.js (para ejecución en consola)
+
+Decisión técnica: structuredClone
+
+Para realizar la copia profunda del arreglo se utilizó la API nativa structuredClone ya que:
+
+-Realiza una copia profunda incluyendo objetos anidados.
+
+-Evita compartir referencias entre el objeto original y el copiado.
+
+-Garantiza la inmutabilidad del arreglo original.
+
+-Esto permite modificar el arreglo copiado sin riesgo de alterar los datos originales.
+
+Cómo ejecutarlo
+
+Desde la raíz del proyecto, ejecutar el siguiente comando en la terminal:
+
+node jsonActivity2.js
 
 ---
 
